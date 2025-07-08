@@ -1,38 +1,41 @@
 ##############################################################################################################################
 # PSScriptAnalyzerSettings.psd1 - Settings for PSScriptAnalyzer invocation.
-# 7/8/2025 - setting up PS version compatibility intellisense
+# 7/8/2025 - setting up PS version compatibility intellisense (and other config settings granularly)
 # https://devblogs.microsoft.com/powershell/using-psscriptanalyzer-to-check-powershell-version-compatibility/
 # PS REFERENCE => https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/readme?view=ps-modules
 ##############################################################################################################################
 
 @{
-	# Only diagnostic records of the specified severity will be generated.
-	# Uncomment the following line if you only want Errors and Warnings but, not Information diagnostic records.
-	<# Severity = @('Error', 'Warning')  #>
-	
-	# Analyze **only** the following rules. Use IncludeRules when you want
-	# to invoke only a small subset of the default rules.
-	<# IncludeRules = @('PSAvoidDefaultValueSwitchParameter',
-					 'PSMisleadingBacktick',
-					 'PSMissingModuleManifestField',
-					 'PSReservedCmdletChar',
-					 'PSReservedParams',
-					 'PSShouldProcess',
-					 'PSUseApprovedVerbs',
-					 'PSAvoidUsingCmdletAliases',
-					 'PSUseDeclaredVarsMoreThanAssignments') #>
-	
-	# Do not analyze the following rules. Use ExcludeRules when you have
-	# commented out the IncludeRules settings above and want to include all
-	# the default rules except for those you exclude below.
-	# Note that if a rule is in both IncludeRules and ExcludeRules, the rule will be excluded.
-	<# ExcludeRules = @('PSAvoidUsingWriteHost') #>
+    # Only diagnostic records of the specified severity will be generated.
+    # Uncomment the following line if you only want Errors and Warnings but, not Information diagnostic records.
+    #
+    #Severity = @('Error', 'Warning')
+
+    # Analyze **only** the following rules. Use IncludeRules when you want
+    # to invoke only a small subset of the default rules.
+    #
+    # IncludeRules = @(
+    #     'PSAvoidDefaultValueSwitchParameter',
+    #     'PSMisleadingBacktick',
+    #     'PSMissingModuleManifestField',
+    #     'PSReservedCmdletChar',
+    #     'PSReservedParams',
+    #     'PSShouldProcess',
+    #     'PSUseApprovedVerbs',
+    #     'PSAvoidUsingCmdletAliases',
+    #     'PSUseDeclaredVarsMoreThanAssignments'
+    # )
+
+    # Do not analyze the following rules. Use ExcludeRules when you have
+    # commented out the IncludeRules settings above and want to include all
+    # the default rules except for those you exclude below.
+    # Note that if a rule is in both IncludeRules and ExcludeRules, the rule will be excluded.
+    ExcludeRules = @('PSAvoidTrailingWhitespace', 'PSUseApprovedVerbs')
     
-	# rule configuration to configure rules that support it:
-	Rules = @{
+    # rule configuration to configure rules that support it:
+    Rules = @{
         PSUseCompatibleCommands = @{
-            # Turns the rule on
-            Enable = $true
+            Enable = $true # Turns the rule on
 
             # Lists the PowerShell platforms we want to check compatibility with
             TargetProfiles = @(
@@ -41,7 +44,7 @@
             )
         }
         
-		PSUseCompatibleSyntax = @{
+        PSUseCompatibleSyntax   = @{
             # This turns the rule on (setting it to false will turn it off)
             Enable = $true
 
@@ -53,15 +56,11 @@
                 '7.4'
             )
         }
-		
-		PSReviewUnusedParameter = @{
+
+        PSReviewUnusedParameter = @{
             CommandsToTraverse = @(
                 'Invoke-Command'
             )
-        }
-		
-		PSUseApprovedVerbs = @{
-            Enable = $false
         }
     }
 }
