@@ -30,7 +30,7 @@
     # commented out the IncludeRules settings above and want to include all
     # the default rules except for those you exclude below.
     # Note that if a rule is in both IncludeRules and ExcludeRules, the rule will be excluded.
-    ExcludeRules = @('PSAvoidTrailingWhitespace', 'PSUseApprovedVerbs')
+    ExcludeRules = @('PSAvoidTrailingWhitespace', 'PSUseApprovedVerbs', 'PSAvoidUsingWriteHost')
     
     # rule configuration to configure rules that support it:
     Rules = @{
